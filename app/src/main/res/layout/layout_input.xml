@@ -1,0 +1,100 @@
+<!--
+  ~ Copyright (c) 2017 Silicon Craft Technology Co.,Ltd. All rights reserved.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.sic.resmeasure.binders.models.InputLayoutViewModel" />
+
+        <variable
+            name="presenter"
+            type="com.sic.resmeasure.binders.contacts.InputLayoutContact.Presenter" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/cbx_text_input"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="@integer/weight_phi"
+            android:background="@{model.box}"
+            android:button="@null"
+            android:clickable="@{model.box}"
+            android:checked="@={model.check}"
+            android:drawableEnd="?android:attr/listChoiceIndicatorMultiple"
+            android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+            android:gravity="center_vertical"
+            android:text="@{model.text}"
+            android:textColor="@color/checkbox_states"
+            android:textSize="@dimen/text_size_small" />
+
+        <EditText
+            android:id="@+id/edt_input"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="@integer/weight_half"
+            android:background="@drawable/abc_edit_text_material"
+            android:enabled="@{model.check}"
+            android:gravity="end"
+            android:inputType="@{model.integer}"
+            android:lines="1"
+            android:maxLength="@{model.length}"
+            android:padding="@dimen/margin_padding_small"
+            android:text="@={model.value}"
+            android:textColor="@color/editor_states"
+            android:textSize="@dimen/text_size_small"
+            android:visibility="@{model.editorVisibility}"
+            app:onTextChanged="@{() -> presenter.onValueChanged(model)}" />
+
+        <Spinner
+            android:id="@+id/spn_input"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="@integer/weight_half"
+            android:background="@drawable/abc_edit_text_material"
+            android:enabled="@{model.check}"
+            android:entries="@{model.adapter}"
+            android:paddingBottom="@dimen/margin_padding_extra_small"
+            android:paddingTop="@dimen/margin_padding_extra_extra_small"
+            android:selectedItemPosition="@={model.select}"
+            android:textColor="@color/editor_states"
+            android:textSize="@dimen/text_size_small"
+            android:visibility="@{model.spinner}" />
+
+        <TextView
+            android:id="@+id/tv_unit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:ellipsize="end"
+            android:enabled="@{model.check}"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:paddingLeft="@dimen/margin_padding_small"
+            android:paddingRight="@dimen/margin_padding_small"
+            android:text="@{model.unit}"
+            android:textColor="@color/text_states"
+            android:textSize="@dimen/text_size_small" />
+    </LinearLayout>
+</layout>
