@@ -91,7 +91,7 @@ public class IdrvRxTask {
                 rev = sample1;
             }
 
-            if (rev != 0x00 && rev != 0x01 && rev != 0x03) { //TODO
+            if (rev > 0x03) { //4341 has rev2
                 subscriber.onNext(-1);
                 return;
             }
